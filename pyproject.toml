@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "splparse"
+version = "0.1.0"
+description = "A parser, AST, formatter and linter for Splunk's Search Processing Language (SPL)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Karthikeyan K" }]
+keywords = ["splunk", "spl", "parser", "ast", "linter", "security"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Compilers",
+  "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+splparse = "splparse.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["splparse*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
