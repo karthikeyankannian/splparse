@@ -44,6 +44,7 @@ print back out.
 | `splparse.lint` | Rule engine (unknown commands/functions, leading wildcards, `index=*`, expensive `join`/`transaction`, …) — add your own with `@rule` |
 | `splparse.analysis` | `indexes()`, `referenced_fields()`, `commands_used()`, `search_filters()` |
 | `splparse` CLI | `splparse parse|fmt|lint|tokens "<spl>"` (or `-` for stdin) |
+| `splparse-mcp` | MCP server exposing the above as tools for Claude Desktop / Claude Code / Cursor (see below) |
 
 ### Dedicated grammars
 
@@ -105,6 +106,31 @@ def no_table_before_stats(q):
         return [Diagnostic('table-before-stats', 'use fields instead of table before stats', 'warning')]
     return []
 ```
+
+## MCP server — validate SPL before Splunk runs it
+
+`splparse-mcp` turns the library into an [MCP](https://modelcontextprotocol.io) server with six tools:
+`validate_spl`, `lint_spl`, `format_spl`, `parse_spl`, `analyze_spl`, `list_spl_commands`.
+Pair it with Splunk's own MCP server (Splunkbase app 7931, which exposes `run_splunk_query`) and an
+assistant can check and lint a generated search *before* executing it.
+
+```bash
+pip install "splparse[mcp]"
+splparse-mcp                 # stdio (what desktop clients expect)
+splparse-mcp --http 8765     # streamable HTTP at http://localhost:8765/mcp
+```
+
+Claude Desktop / Claude Code (`claude_desktop_config.json` or `.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "splparse": { "command": "splparse-mcp" }
+  }
+}
+```
+
+Works with MCP Python SDK 1.x and 2.x.
 
 ## Known limitations (v0.1)
 
