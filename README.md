@@ -1,6 +1,6 @@
 # splparse
 
-![CI](https://github.com/karthikeyan-k/splparse/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Karthikeyankannian/splparse/actions/workflows/ci.yml/badge.svg)
 
 A parser, AST, formatter and linter for Splunk's **Search Processing Language (SPL)** — the
 `Microsoft.Azure.Kusto.Language` equivalent that Splunk never shipped. Pure Python, zero
@@ -66,9 +66,9 @@ expressions get their own grammar: implicit `AND`, uppercase `AND`/`OR`/`NOT`, `
 ## Install
 
 ```bash
-pip install git+https://github.com/karthikeyan-k/splparse.git
+pip install git+https://github.com/Karthikeyankannian/splparse.git
 # or, for development:
-git clone https://github.com/karthikeyan-k/splparse.git && cd splparse
+git clone https://github.com/Karthikeyankannian/splparse.git && cd splparse
 pip install -e ".[dev]" && pytest
 ```
 
